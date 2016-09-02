@@ -1,0 +1,23 @@
+<h1>Login</h1>
+
+<div  class="form-horizontal">
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Email</label>
+        <div class="col-md-4">
+            <input class="form-control" id="username" [(ngModel)]="username">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pass" class="col-sm-2 control-label">Password</label>
+        <div class="col-md-4">
+            <input class="form-control" id="pass" [(ngModel)]="pass" type="password" pPassword />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+            <button class="btn btn-default" pButton type="submit" (click)="login()" label="Click">Login</button>
+        </div>
+    </div>
+
+    <a href="#/signup" class="btn btn-success">Registrati!</a>
+</div>

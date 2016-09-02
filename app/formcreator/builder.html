@@ -1,0 +1,6 @@
+<div class="col-md-8">
+    <container [fields]="fields" (drop)="do_drop($event)"></container>
+</div>
+<div class="col-md-4">
+    <selector (dragstart)="do_dragstart($event, field)" (dragend)="do_dragend($event)"></selector>
+</div>

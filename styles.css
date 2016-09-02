@@ -1,0 +1,24 @@
+ /*
+  * See https://github.com/angular/angular.io/blob/master/public/docs/_examples/styles.css
+  * for the full set of master styles used by the documentation samples
+  */
+
+#main{
+  margin-top: 50px;
+}
+
+body{
+  margin:0;
+}
+
+.navbar{
+      margin-top: -8px;
+    margin-left: -11px;
+    margin-right: -8px;
+}
+
+.ui-g-12.ui-md-2{
+  height: 100%;
+  padding:0;
+  background-color:#2c3e50;
+}

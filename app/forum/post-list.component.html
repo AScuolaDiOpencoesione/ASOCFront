@@ -1,0 +1,9 @@
+
+<ul>
+    <li post-list-item *ngFor="let item of items|async" [item]="item" ></li>
+</ul>
+
+<button class="btn btn-default" (click)="newmsg()" *ngIf="items.length>0" >Rispondi</button>
+<button class="btn btn-default" (click)="newmsg()" *ngIf="items.length==0" >Invia un messaggio</button>
+
+<router-outlet></router-outlet>

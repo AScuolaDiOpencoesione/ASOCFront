@@ -1,0 +1,19 @@
+<div class="row">
+    <label class="col-md-2">Titolo Form</label>
+    <div class="col-md-10">
+        <input class="form-control" type="text" name="title">
+    </div>
+</div>
+
+<div pDroppable="dd" 
+    (onDrop)="op_drop($event)" 
+    class="droppableForm" 
+    style="width:100%; min-height:300px;">
+    <div>
+        <div *ngFor="let field of fields" >
+            <fieldedit [item]="field" pDraggable="dd" dragEffect="move"></fieldedit>
+        </div>
+    </div>
+</div>
+
+<button (click)="save($event)" class="btn btn-default">Salva il form</button> 

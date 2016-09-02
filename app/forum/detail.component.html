@@ -1,0 +1,7 @@
+<h2>{{item.name}}</h2>
+
+<ul>
+    <li *ngFor="let kvp of item | async">{{kvp.key}}: {{kvp.value}}</li> 
+</ul>
+
+<router-outlet></router-outlet>

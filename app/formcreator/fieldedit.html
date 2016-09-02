@@ -1,0 +1,35 @@
+<div class="row">
+    <h3>{{item.name}}</h3>
+    <div class="col-md-6">
+        <div class="row">
+            <label class="col-md-3">Etichetta:</label>
+            <div class="col-md-9">
+                <input class="form-control" type="text" [(ngModel)]="item.label">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-md-3">Obbligatorio:</label>
+            <div class="col-md-9">
+                <input type="checkbox" [(ngModel)]="item.required">
+            </div>
+        </div>
+        <div class="row" *ngIf="item.require_content" >
+            <label class="col-md-3">Valori (uno per riga):</label>
+            <div class="col-md-9">
+                <textarea class="form-control" [(ngModel)]="item.values"></textarea>
+            </div>
+        </div>
+        <div class="row" *ngIf="item.mode" >
+            <label class="col-md-3">Modalità:</label>
+            <div class="col-md-9">
+                <select class="form-control" name="mode" [(ngModel)]="item.selected_mode">
+                    <option  *ngFor="let mode of item.mode" value={{mode}}>{{mode}}</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-danger">Cancella</button>
+    </div>
+    <div class="col-md-6">
+        <preview [item]="item"></preview>
+    </div>
+</div>

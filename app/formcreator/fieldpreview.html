@@ -1,0 +1,26 @@
+
+<label  *ngIf="item.input_type != 'title'" class="form-label col-md-2">{{item.label}}<span *ngIf="item.required">*</span> </label>
+<h1 *ngIf="item.input_type == 'title'">{{item.label}}</h1>
+<div class="col-md-8">
+    <input *ngIf="item.input_type == 'text'"  class="form-control" type="text" name="{{item.name}}">
+    <textarea *ngIf="item.input_type == 'textarea'"  class="form-control" name="{{item.name}}"></textarea>
+    <input *ngIf="item.input_type == 'integer'"  class="form-control" type="text" name="{{item.name}}">
+    <input *ngIf="item.input_type == 'file'"  class="form-control" type="file" name="{{item.name}}">
+    <input *ngIf="item.input_type == 'boolean'"  type="checkbox" name="{{item.name}}">
+
+    <select *ngIf="item.type == 'select_one' && item.selected_mode == 'select'"  class="form-control" name="{{item.name}}">
+        <option *ngFor="let c of item_choices()|async" value="{{c}}">{{c}}</option> 
+    </select>
+    <div *ngIf="item.type == 'select_one' && item.selected_mode == 'radio'">
+        <input type="radio" *ngFor="let c of item_choices()|async" name="{{item.name}}" value="{{c}}">{{c}}
+    </div>
+    
+    
+    <select *ngIf="item.type == 'select_many'  && item.selected_mode == 'select'" multiple="multiple" class="form-control" name="{{item.name}}">
+        <option *ngFor="let c of item_choices()|async" value="{{c}}">{{c}}</option> 
+    </select>
+    <div *ngIf="item.type == 'select_one' && item.selected_mode == 'checkbox'">
+        <input type="checkbox" *ngFor="let c of item_choices()|async" name="{{item.name}}" value="{{c}}">{{c}}
+    </div>
+</div>
+

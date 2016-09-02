@@ -1,0 +1,31 @@
+<h2>{{name}}</h2>
+<form class="col-md-10 col-md-offset-1">
+    <div class="form-group" *ngFor="let item of fields" >
+        <input type="hidden" *ngIf="item.value != null" name="{{item.name}}" value="{{item.value}}">
+        
+        <div class="row" *ngIf="item.value == null">
+            <label class="form-label col-md-2">{{item.label}}<span *ngIf="item.required">*</span> </label>
+
+            <div class="col-md-10">
+                <input *ngIf="item.type == 'string' && item.long_text == false"  class="form-control" type="text" name="{{item.name}}">
+                <textarea *ngIf="item.type == 'string' && item.long_text == true"  class="form-control" type="text" name="{{item.name}}"></textarea>
+                <input *ngIf="item.type == 'integer'"  class="form-control" type="text" name="{{item.name}}">
+                <input *ngIf="item.type == 'file upload'"  class="form-control" type="file" name="{{item.name}}" (change)="loadFile($event, item.name)">
+                <input *ngIf="item.type == 'boolean'"  type="checkbox" name="{{item.name}}">
+
+                <select *ngIf="item.type == 'choice'"  class="form-control" name="{{item.name}}">
+                    <option *ngFor="let c of item.choices" value="{{c.value}}">{{c.display_name}}</option> 
+                </select>
+                <select *ngIf="item.type == 'multiple choice'" multiple="multiple" class="form-control" name="{{item.name}}" (change)="setSelected($event, item.name)">
+                    <option *ngFor="let c of item.choices" value="{{c.value}}">{{c.display_name}}</option> 
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-md-10 col-md-offset-2 help-block">{{item.help_text}}</p>
+        </div>
+
+    </div>
+    <button type="submit" (click)="submit($event)" class="btn btn-success">Salva</button>
+    
+</form>
