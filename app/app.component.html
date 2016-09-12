@@ -1,17 +1,17 @@
-<div class="" style="width:100%;display:flex;flex-flow:row wrap; "> 
-    <div class="" style="flex: 1 100%;">
+<div class="" style="width:100%;"> 
+    <div class="" style="">
         <div class="mainbar" style=""> 
-            <nav navbar *ngIf="header" class="navbar navbar-default" [brand]="brand" [navbarRight]="navright"></nav>
+            <nav navbar *ngIf="header" class="navbar navbar-default" [brand]="brand" [navbarRight]="navright" style="background-color:#419da4; border-color:#419da4;"></nav>
         </div>
     </div>
-    <aside div class="sidebar" style="flex:1; max-width:299px; height:100%; background-color:#222222;    margin-top: -21px;">
+    <aside div class="sidebar" style="float:left;width:299px;max-width:299px;display:block;min-height:350px;height:100%;background-color:#419da4;margin-top:-21px;">
         &nbsp;
         <sidebar [user_type]="user_type" [items]="sidebarMenu" [brand]="brand"></sidebar>
     </aside>
-    <article class="main"  style=" flex:2;">
-        <router-outlet></router-outlet>
+    <article class="main" style="margin-left:300px;padding-left:40px;display:block;height:92%;">
+        <router-outlet> </router-outlet>
     </article>
-    <footer style="flex: 1 100%; text-align:center;">
-        &copy; 2016 A Scuola di OpenCopesione
+    <footer style="width:100%;text-align:center;">
+        &copy; 2016 A Scuola di OpenCoesione
     </footer>
 </div>

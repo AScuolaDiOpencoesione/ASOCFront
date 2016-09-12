@@ -25,7 +25,7 @@ var AppComponent = (function () {
         this.sidebarMenu = [
             {
                 text: "Candidatura",
-                icon: "file-o",
+                icon: "check-square-o",
                 children: [],
                 path: "apply",
                 type: ["admin", "teacher"],
@@ -106,7 +106,7 @@ var AppComponent = (function () {
         }
         else
             this.navright.push({
-                text: "Login",
+                text: "Login/Registrati",
                 icon: "sign-in",
                 children: new Array(),
                 path: "login",

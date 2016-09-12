@@ -7,7 +7,7 @@ export class DRFEditComponent<A,T extends IDRFService<A>> extends DRFNewComponen
   @Input() id;
 
   public item:A;
-
+  
   get(id:number){
     this._service.getOne(id).then(
         item => this.item = item

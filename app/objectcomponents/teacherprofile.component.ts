@@ -1,5 +1,5 @@
 import { Component, Input }    from '@angular/core';
-import { ActivatedRoute }              from '@angular/router';
+import { ActivatedRoute, Router }              from '@angular/router';
 
 import {DRFListComponent, DRFListItemComponent } from "./list.component"
 import {DRFDetailComponent } from "./detail.component"
@@ -74,18 +74,30 @@ export class TeacherProfileEditComponent extends DRFEditComponent<TeacherProfile
 }
 
 @Component({
-  selector:    'school-new',
+  selector:    'teacher-new',
   templateUrl: 'form.component.html',
   moduleId: module.id,
   providers:  [TeacherProfileService]
 })
 
 export class TeacherProfileNewComponent extends DRFNewComponent<TeacherProfile,TeacherProfileService> {
-  constructor(private route: ActivatedRoute, service:TeacherProfileService){
+  constructor(private route: ActivatedRoute, private router: Router, service:TeacherProfileService){
     super();
     this.setService(service);
     this.prepare();
   }
 
+  postSave(item:TeacherProfile, errors:any){ 
+    
+    this.router.navigateByUrl("/profile/create/teacher/thanks");
+  }
  
 }
+
+@Component({
+  selector:    'teacher-new',
+  template: '<p>Grazie! Il tuo profilo docente è stato creato. ora puoi procedere con la compilazione della candidatura per partecipare al percorso A Scuola di OpenCoesione 2016/2017.</p><p>Per informazioni sulla compilazione: <a href="mailto:asoc@opencoesione.gov.it">asoc@opencoesione.gov.it</a></p>',
+  moduleId: module.id
+})
+
+export class TeacherProfileThanksComponent{}

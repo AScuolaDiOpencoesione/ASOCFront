@@ -13,7 +13,7 @@ import { BehaviorSubject  }    from 'rxjs/BehaviorSubject';
  * Provides the base Authentication Service functionalities
  */
 export interface IAuthService {
-    login(user: string, pass: string);
+    login(user: string, pass: string, callback:Function);
     authenticated(): boolean | Promise<boolean>;
     refresh();
     logout(user: string);
@@ -28,7 +28,7 @@ export abstract class AuthService extends DRFResourceServiceBase implements IAut
         super(authHttp);
     }
 
-    abstract login(user: string, pass: string);
+    abstract login(user: string, pass: string, callback:Function);
     abstract logout(user: string);
     abstract authenticated(): boolean | Promise<boolean>;
     abstract refresh();
@@ -87,7 +87,7 @@ export class JWTAuthService extends AuthService {
         this.user_id = user_id;
     }
 
-    login(user: string, pass: string) {
+    login(user: string, pass: string, error:Function) {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
         headers.append('Content-Type', 'application/json');
@@ -125,8 +125,10 @@ export class JWTAuthService extends AuthService {
 
                 this.loggedInSource.next(true);
                 return;
-            })
-            .catch(this.handleError);
+            }, err =>{
+                error(err.json().non_field_errors[0]);
+            });
+            
     }
 
     authenticated() {
@@ -143,6 +145,8 @@ export class JWTAuthService extends AuthService {
                 return false;
             });
     }
+
+    
 
     refresh() {
         let headers = new Headers();

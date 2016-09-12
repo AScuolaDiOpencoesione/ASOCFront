@@ -69,7 +69,7 @@ var JWTAuthService = (function (_super) {
     JWTAuthService.prototype.setUserID = function (user_id) {
         this.user_id = user_id;
     };
-    JWTAuthService.prototype.login = function (user, pass) {
+    JWTAuthService.prototype.login = function (user, pass, error) {
         var _this = this;
         var headers = new http_1.Headers();
         headers.append('Accept', 'application/json');
@@ -106,8 +106,9 @@ var JWTAuthService = (function (_super) {
             _this.user_type = localStorage.getItem("user_type");
             _this.loggedInSource.next(true);
             return;
-        })
-            .catch(this.handleError);
+        }, function (err) {
+            error(err.json().non_field_errors[0]);
+        });
     };
     JWTAuthService.prototype.authenticated = function () {
         var headers = new http_1.Headers();

@@ -458,7 +458,7 @@ var ForumComponent = (function () {
     ForumComponent = __decorate([
         core_1.Component({
             selector: 'product-details',
-            template: "\n    <h1>Forum</h1>\n    <router-outlet></router-outlet>\n    <!-- Overview & Specs components get added here by the router -->\n  ",
+            template: "\n    <h1>Forum</h1>\n    <p>Qui puoi porre le domande relative alle attivit\u00E0 delle lezioni o segnalare problemi tecnici</p>\n    <hr>\n    <router-outlet></router-outlet>\n    <!-- Overview & Specs components get added here by the router -->\n  ",
             directives: [router_2.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [router_1.ActivatedRoute])

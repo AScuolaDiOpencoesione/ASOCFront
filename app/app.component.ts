@@ -70,7 +70,7 @@ export class AppComponent implements OnInit{
 		}
 		else 
 			this.navright.push({
-				text:"Login",
+				text:"Login/Registrati",
 				icon:"sign-in",
 				children:new Array<NavItem>(),
 				path:"login",
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit{
 			type:["admin", "student"],
 		},*/{
 			text:"Candidatura",
-			icon:"file-o",
+			icon:"check-square-o",
 			children:[],
 			path:"apply",
 			type:["admin", "teacher"],

@@ -102,22 +102,40 @@ var TeacherProfileEditComponent = (function (_super) {
 exports.TeacherProfileEditComponent = TeacherProfileEditComponent;
 var TeacherProfileNewComponent = (function (_super) {
     __extends(TeacherProfileNewComponent, _super);
-    function TeacherProfileNewComponent(route, service) {
+    function TeacherProfileNewComponent(route, router, service) {
         _super.call(this);
         this.route = route;
+        this.router = router;
         this.setService(service);
         this.prepare();
     }
+    TeacherProfileNewComponent.prototype.postSave = function (item, errors) {
+        this.router.navigateByUrl("/profile/create/teacher/thanks");
+    };
     TeacherProfileNewComponent = __decorate([
         core_1.Component({
-            selector: 'school-new',
+            selector: 'teacher-new',
             templateUrl: 'form.component.html',
             moduleId: module.id,
             providers: [teacherprofile_service_1.TeacherProfileService]
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, teacherprofile_service_1.TeacherProfileService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, teacherprofile_service_1.TeacherProfileService])
     ], TeacherProfileNewComponent);
     return TeacherProfileNewComponent;
 }(new_component_1.DRFNewComponent));
 exports.TeacherProfileNewComponent = TeacherProfileNewComponent;
+var TeacherProfileThanksComponent = (function () {
+    function TeacherProfileThanksComponent() {
+    }
+    TeacherProfileThanksComponent = __decorate([
+        core_1.Component({
+            selector: 'teacher-new',
+            template: '<p>Grazie! Il tuo profilo docente è stato creato. ora puoi procedere con la compilazione della candidatura per partecipare al percorso A Scuola di OpenCoesione 2016/2017.</p><p>Per informazioni sulla compilazione: <a href="mailto:asoc@opencoesione.gov.it">asoc@opencoesione.gov.it</a></p>',
+            moduleId: module.id
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TeacherProfileThanksComponent);
+    return TeacherProfileThanksComponent;
+}());
+exports.TeacherProfileThanksComponent = TeacherProfileThanksComponent;
 //# sourceMappingURL=teacherprofile.component.js.map

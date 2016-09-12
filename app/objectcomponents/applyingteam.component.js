@@ -48,7 +48,7 @@ var ApplyingTeamListComponent = (function (_super) {
     }
     ApplyingTeamListComponent = __decorate([
         core_1.Component({
-            selector: 'school-list',
+            selector: 'applyingteam-list',
             templateUrl: 'list.component.html',
             moduleId: module.id,
             providers: [applyingteam_service_1.ApplyingTeamService],
@@ -70,7 +70,7 @@ var ApplyingTeamDetailComponent = (function (_super) {
     }
     ApplyingTeamDetailComponent = __decorate([
         core_1.Component({
-            selector: 'school',
+            selector: 'applyingteam',
             templateUrl: 'at-detail.component.html',
             moduleId: module.id,
             providers: [applyingteam_service_1.ApplyingTeamService]
@@ -90,7 +90,7 @@ var ApplyingTeamEditComponent = (function (_super) {
     }
     ApplyingTeamEditComponent = __decorate([
         core_1.Component({
-            selector: 'school-edit',
+            selector: 'applyingteam-edit',
             templateUrl: 'form.component.html',
             moduleId: module.id,
             providers: [applyingteam_service_1.ApplyingTeamService]
@@ -110,11 +110,12 @@ var ApplyingTeamNewComponent = (function (_super) {
         this.prepare();
     }
     ApplyingTeamNewComponent.prototype.postSave = function (item) {
+        alert("La compilazione è terminata.\n\n Riceverai a breve via e-mail copia della candidatura in formato stampabile.\n\nGrazie per esserti candidato ad ASOC1617!.");
         this.router.navigate(['application', item.id, "review"]);
     };
     ApplyingTeamNewComponent = __decorate([
         core_1.Component({
-            selector: 'school-new',
+            selector: 'applyingteam-new',
             templateUrl: 'form.component.html',
             moduleId: module.id,
             providers: [applyingteam_service_1.ApplyingTeamService]

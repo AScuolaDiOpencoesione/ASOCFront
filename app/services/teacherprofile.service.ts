@@ -14,7 +14,7 @@ import {ASOCService} from "./asoc.service";
 export class TeacherProfileService extends ASOCService<TeacherProfile>{
     constructor (http: AuthHttp){
         super(http);
-        this.setSpecUrl("/applyingteam/");
+        this.setSpecUrl("/profile/teacher/");
     }
 }
 

@@ -70,7 +70,7 @@ export interface IDRFService<T> extends IDRFServiceBase{
    getOptions();
 
    removeOne(id:number);
-   addOne(item:T);
+   addOne(item:T, error:Function);
 }
 
 
@@ -139,7 +139,7 @@ export abstract class DRFService<T> extends DRFResourceServiceBase implements ID
     return ;
   }
 
-  addOne(item: T) {
+  addOne(item: T, error:Function=null) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     headers.append('Accept','application/json');
@@ -147,8 +147,10 @@ export abstract class DRFService<T> extends DRFResourceServiceBase implements ID
     return this.http.post(this._res_url, JSON.stringify(item),
                           {headers: headers})
       .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
+      .then(res => res.json(), err=>{
+        if (error != null)
+          error(err);
+      });
   }
 
 
@@ -190,6 +192,21 @@ export class UserService extends DRFServiceBase{
         console.log(content);
       })
       .catch(this.handleError);
+  }
+  
+  activate(uid:string, token:string) {
+    let url = this._base_url+"/activate/";
+    return this.noauthhttp.post(url, JSON.stringify({"uid":uid, "token":token}), { headers: this.headers })
+      .toPromise()
+      .then(content => {
+        console.log(content);
+      });
+    }
+
+  hasProfile(){
+    let isnn = localStorage.getItem("user_type") != null;
+    let isnu = localStorage.getItem("user_type") != "undefined";
+    return isnn && isnu;
   }
 }
 

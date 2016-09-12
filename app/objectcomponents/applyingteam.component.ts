@@ -26,7 +26,7 @@ export class ApplyingTeamListItemComponent extends DRFListItemComponent<Applying
 }
 
 @Component({
-  selector:    'school-list',
+  selector:    'applyingteam-list',
   templateUrl: 'list.component.html',
   moduleId: module.id,
   providers:  [ApplyingTeamService],
@@ -42,7 +42,7 @@ export class ApplyingTeamListComponent extends DRFListComponent<ApplyingTeam,App
 }
 
 @Component({
-  selector:    'school',
+  selector:    'applyingteam',
   templateUrl: 'at-detail.component.html',
   moduleId: module.id,
   providers:  [ApplyingTeamService]
@@ -58,7 +58,7 @@ export class ApplyingTeamDetailComponent extends DRFDetailComponent<ApplyingTeam
 }
 
 @Component({
-  selector:    'school-edit',
+  selector:    'applyingteam-edit',
   templateUrl: 'form.component.html',
   moduleId: module.id,
 
@@ -74,7 +74,7 @@ export class ApplyingTeamEditComponent extends DRFEditComponent<ApplyingTeam,App
 }
 
 @Component({
-  selector:    'school-new',
+  selector:    'applyingteam-new',
   templateUrl: 'form.component.html',
   moduleId: module.id,
   providers:  [ApplyingTeamService]
@@ -88,6 +88,7 @@ export class ApplyingTeamNewComponent extends DRFNewComponent<ApplyingTeam,Apply
   }
 
   postSave(item:ApplyingTeam){ 
+    alert("La compilazione è terminata.\n\n Riceverai a breve via e-mail copia della candidatura in formato stampabile.\n\nGrazie per esserti candidato ad ASOC1617!.");
     this.router.navigate(['application',item.id, "review"]);
   }
 }

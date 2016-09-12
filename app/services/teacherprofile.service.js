@@ -21,7 +21,7 @@ var TeacherProfileService = (function (_super) {
     __extends(TeacherProfileService, _super);
     function TeacherProfileService(http) {
         _super.call(this, http);
-        this.setSpecUrl("/applyingteam/");
+        this.setSpecUrl("/profile/teacher/");
     }
     TeacherProfileService = __decorate([
         core_1.Injectable(), 

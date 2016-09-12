@@ -120,15 +120,18 @@ var DRFService = (function (_super) {
         headers.append('Accept', 'application/json');
         return;
     };
-    DRFService.prototype.addOne = function (item) {
+    DRFService.prototype.addOne = function (item, error) {
+        if (error === void 0) { error = null; }
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         headers.append('X-CSRFToken', this.getCookie('csrftoken'));
         return this.http.post(this._res_url, JSON.stringify(item), { headers: headers })
             .toPromise()
-            .then(function (res) { return res.json(); })
-            .catch(this.handleError);
+            .then(function (res) { return res.json(); }, function (err) {
+            if (error != null)
+                error(err);
+        });
     };
     DRFService = __decorate([
         core_1.Injectable(), 
@@ -167,6 +170,19 @@ var UserService = (function (_super) {
             console.log(content);
         })
             .catch(this.handleError);
+    };
+    UserService.prototype.activate = function (uid, token) {
+        var url = this._base_url + "/activate/";
+        return this.noauthhttp.post(url, JSON.stringify({ "uid": uid, "token": token }), { headers: this.headers })
+            .toPromise()
+            .then(function (content) {
+            console.log(content);
+        });
+    };
+    UserService.prototype.hasProfile = function () {
+        var isnn = localStorage.getItem("user_type") != null;
+        var isnu = localStorage.getItem("user_type") != "undefined";
+        return isnn && isnu;
     };
     return UserService;
 }(DRFServiceBase));

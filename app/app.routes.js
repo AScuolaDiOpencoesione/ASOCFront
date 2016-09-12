@@ -26,8 +26,8 @@ var edicRoutes = new drf_model_1.DRFModelRouter("partners/edic", edic_component_
 var associationRoutes = new drf_model_1.DRFModelRouter("partners/association", association_component_1.AssociationListComponent, association_component_1.AssociationDetailComponent, association_component_1.AssociationNewComponent, association_component_1.AssociationEditComponent, auth_guard_1.AuthGuard).routes();
 var routes = [
     { path: '', component: home_component_1.HomeComponent },
-    { path: 'signup', component: login_component_1.RegisterComponent },
-    { path: 'login', component: login_component_1.LoginComponent },
+    { path: 'signup', component: login_component_1.LogRegComponent },
+    { path: 'login', component: login_component_1.LogRegComponent },
     { path: 'logout', component: login_component_1.LogoutComponent },
     { path: 'apply', component: applyingteam_component_1.ApplyingTeamNewComponent, canActivate: [auth_guard_1.AuthGuard] }
 ].concat(schoolRoutes, edicRoutes, associationRoutes, [
@@ -36,6 +36,7 @@ var routes = [
     { path: 'profile/:id', component: profileview_component_1.ProfileViewComponent },
     { path: 'profile/create', component: profilecreation_component_1.ProfileCreationSelection, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'profile/create/teacher', component: teacherprofile_component_1.TeacherProfileNewComponent, canActivate: [auth_guard_1.AuthGuard] },
+    { path: 'profile/create/teacher/thanks', component: teacherprofile_component_1.TeacherProfileThanksComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'profile/create/edic', component: edicprofile_component_1.EdicProfileNewComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: 'profile/create/association', component: associationprofile_component_1.AssociationProfileNewComponent, canActivate: [auth_guard_1.AuthGuard] },
     //{ path: 'profile/create/student', component: SchoolNewComponent, canActivate: [AuthGuard] },
@@ -54,6 +55,8 @@ var routes = [
                         ] }
                 ] }
         ] },
+    { path: 'activate/:uid/:token', component: login_component_1.ActivationComponent },
+    { path: 'confirm/:uid/:token', component: login_component_1.ActivationComponent },
     { path: 'schoolblog', component: schoolblog_component_1.SchoolBlogComponent },
     { path: 'communityblog', component: communityblog_component_1.CommunityBlogComponent },
 ]);

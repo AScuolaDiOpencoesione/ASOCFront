@@ -1,31 +1,79 @@
-<h2>{{name}}</h2>
-<form class="col-md-10 col-md-offset-1">
-    <div class="form-group" *ngFor="let item of fields" >
-        <input type="hidden" *ngIf="item.value != null" name="{{item.name}}" value="{{item.value}}">
+<div class="scrollable" id="scrollable">
+    <div class="hero">
+    <h1>{{name}}</h1>
+    <p [innerHTML]="description"></p>
+    </div>
+    <form class="col-md-10 col-md-offset-1" style="margin-top:20px;">
+        <!-- Sections wrapper -->
+        <div *ngIf="hasSections()">
+            <div class="col-md-8" id="sectionator">
+                <ul class="progress-indicator stacked dark">
+                    <li *ngFor="let s of getSections()" [ngClass]="{completed:isVisibleStack(s.sn), nope:!isVisibleStack(s.sn)}">
+                        <span class="bubble"></span>
+                        <span class="stacked-text">{{s.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div *ngFor="let sec of sectionKeys()" class="section_title" [ngClass]="{visible:isVisible(sec), hidden:!isVisible(sec)}"><h2>{{sections[sec].name}}</h2><p>{{sections[sec].description}}</p></div>
+        </div>
+        <!-- Sections wrapper -->
         
-        <div class="row" *ngIf="item.value == null">
-            <label class="form-label col-md-2">{{item.label}}<span *ngIf="item.required">*</span> </label>
+        <div class="form-group" [ngClass]="{visible:isItemVisible(item), hidden:!isItemVisible(item), 'has-error':errormsg(item.name)}" *ngFor="let item of fields">
+            <input type="hidden" *ngIf="item.value != null" name="{{item.name}}" value="{{item.value}}">
+            
+            <div class="row" *ngIf="item.type == 'multiple choice'">
+                <div class="col-md-6 col-md-offset-2 help-block" [innerHtml]="item.help_text"></div>
+            </div>
 
-            <div class="col-md-10">
-                <input *ngIf="item.type == 'string' && item.long_text == false"  class="form-control" type="text" name="{{item.name}}">
-                <textarea *ngIf="item.type == 'string' && item.long_text == true"  class="form-control" type="text" name="{{item.name}}"></textarea>
-                <input *ngIf="item.type == 'integer'"  class="form-control" type="text" name="{{item.name}}">
-                <input *ngIf="item.type == 'file upload'"  class="form-control" type="file" name="{{item.name}}" (change)="loadFile($event, item.name)">
-                <input *ngIf="item.type == 'boolean'"  type="checkbox" name="{{item.name}}">
+            <div class="row" *ngIf="item.value == null">
+                <label class="form-label col-md-2" >
+                    <span [innerHtml]="item.label"></span>
+                    <span *ngIf="item.required">*</span> 
+                </label>
+                <div class="col-md-6">
+                    <input *ngIf="item.type == 'string' && item.long_text == false"  class="form-control" (change)="watchDependents($event, item.name)" type="text" name="{{item.name}}">
+                    <textarea *ngIf="item.type == 'string' && item.long_text == true"  class="form-control" (change)="watchDependents($event, item.name)" type="text" name="{{item.name}}"></textarea>
+                    <input *ngIf="item.type == 'integer'"  class="form-control" type="text" name="{{item.name}}" (change)="watchDependents($event, item.name)">
+                    <input *ngIf="item.type == 'file upload'"  class="form-control" type="file" name="{{item.name}}" (change)="loadFile($event, item.name)">
+                    <div *ngIf="item.type == 'boolean'">
+                        <p class="col-md-10 help-block" [innerHtml]="item.help_text"></p>
+                        <div class="radio">
+                        <label class="col-md-1 ">
+                            <input type="radio" value="true" (change)="watchDependents($event, item.name)" name="{{item.name}}">SI
+                        </label>
+                        </div>
+                        <div class="radio">
+                        <label class="col-md-1">
+                            <input type="radio"  value="false" (change)="watchDependents($event, item.name)" name="{{item.name}}">NO
+                        </label>
+                        </div>
+                    </div>
 
-                <select *ngIf="item.type == 'choice'"  class="form-control" name="{{item.name}}">
-                    <option *ngFor="let c of item.choices" value="{{c.value}}">{{c.display_name}}</option> 
-                </select>
-                <select *ngIf="item.type == 'multiple choice'" multiple="multiple" class="form-control" name="{{item.name}}" (change)="setSelected($event, item.name)">
-                    <option *ngFor="let c of item.choices" value="{{c.value}}">{{c.display_name}}</option> 
-                </select>
+                    <select *ngIf="item.type == 'choice'"  class="form-control" (change)="watchDependents($event, item.name)" name="{{item.name}}">
+                        <option value="">--- Seleziona una delle opzioni ---</option>
+                        <option *ngFor="let c of item.choices" [ngClass]="{visible:isOptionVisible(item.name, c.value, c.additionals), hidden:!isOptionVisible(item.name, c.value, c.additionals)}" value="{{c.value}}">{{c.display_name}}</option> 
+                    </select>
+                    <div *ngIf="item.type == 'multiple choice'" >
+                        <div *ngFor="let c of item.choices"> <input type="checkbox" data-on="Si" data-off="No" data-onstyle="success" (change)="watchDependents($event, item.name); setSelected($event, item.name)" data-offstyle="danger" name="{{item.name}}" value="{{c.value}}"> <span [innerHtml]="c.display_name"> </span></div> 
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.type != 'boolean' && item.type != 'multiple choice'">
+                <div class="col-md-6 col-md-offset-2 help-block" [innerHtml]="item.help_text"></div>
+            </div>
+            <div class="row"><hr class="col-md-8"></div>
+        </div>
+        <!-- Sections wrapper -->
+        <div *ngIf="hasSections()">
+            <div [ngClass]="{visible:isVisible(sec), hidden:!isVisible(sec)}" *ngFor="let sec of sectionKeys()">
+                <button (click)="setActive(prevSection(sec))" *ngIf="sectionIndex(sec)>0" class="btn btn-info"><i class="fa fa-fw fa-chevron-left"></i> Indietro</button>   
+                <button (click)="setActive(nextSection(sec))" *ngIf="!sectionLast(sec)" class="btn btn-info">Avanti <i class="fa fa-fw fa-chevron-right"></i></button>   
+                <button *ngIf="sectionLast(sec)" (click)="submitData($event)" class="btn btn-success"><i class="fa fa-fw fa-save"></i> Salva e invia</button>    
             </div>
         </div>
-        <div class="row">
-            <p class="col-md-10 col-md-offset-2 help-block">{{item.help_text}}</p>
-        </div>
-
-    </div>
-    <button type="submit" (click)="submit($event)" class="btn btn-success">Salva</button>
-    
-</form>
+        <!-- Sections wrapper -->
+        <div *ngIf="!hasSections()">
+                <button (click)="submitData($event)" class="btn btn-success"><i class="fa fa-fw fa-save"></i> Salva e invia</button>    
+        </div>       
+    </form>
+</div>

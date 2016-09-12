@@ -357,6 +357,8 @@ export class ForumPostNewComponent extends DRFNewComponent<ForumPost,ForumPostSe
   selector: 'product-details',
   template: `
     <h1>Forum</h1>
+    <p>Qui puoi porre le domande relative alle attività delle lezioni o segnalare problemi tecnici</p>
+    <hr>
     <router-outlet></router-outlet>
     <!-- Overview & Specs components get added here by the router -->
   `,

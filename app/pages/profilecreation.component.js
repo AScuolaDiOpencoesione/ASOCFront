@@ -14,7 +14,9 @@ var ProfileCreationSelection = (function () {
     }
     ProfileCreationSelection = __decorate([
         core_1.Component({
-            template: "\n  <h1>Completa il profilo come...</h1>\n  <div class=\"container\"> \n      <div class=\"col-md-4\">\n          <a class=\"btn btn-large btn-default\" href=\"#/profile/create/teacher\">Docente</a>\n      </div> \n      <div class=\"col-md-4\">\n          <a class=\"btn btn-large btn-default\" href=\"#/profile/create/edic\">EDIC</a>\n      </div> \n      <div class=\"col-md-4\">\n          <a class=\"btn btn-large btn-default\" href=\"#/profile/create/association\">Associazione</a>\n      </div>\n  </div>\n  "
+            moduleId: module.id,
+            selector: 'profile-creation-selector',
+            template: "\n        <h1>Completa il profilo come...</h1>\n        <div class=\"container\"> \n            <div class=\"col-md-4\">\n                <a class=\"btn btn-large btn-default\" href=\"#/profile/create/teacher\">Docente</a>\n            </div> \n            <div class=\"col-md-4\">\n                <a class=\"btn btn-large btn-default\" href=\"#/profile/create/edic\">EDIC</a>\n            </div> \n            <div class=\"col-md-4\">\n                <a class=\"btn btn-large btn-default\" href=\"#/profile/create/association\">Associazione</a>\n            </div>\n        </div>\n        "
         }), 
         __metadata('design:paramtypes', [])
     ], ProfileCreationSelection);

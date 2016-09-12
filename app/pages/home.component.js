@@ -15,7 +15,8 @@ var HomeComponent = (function () {
     }
     HomeComponent = __decorate([
         core_1.Component({
-            template: '<div class="ui-g"> <div class="ui-g-12 ui-md-6"><a class="btn btn-large btn-default" href="#/apply">Candida la tua scuola!</a></div><div class="ui-g-12 ui-md-6"><p-panel header="I prossimi appuntamenti"><calendar ></calendar></p-panel></div></div>',
+            moduleId: module.id,
+            templateUrl: 'home.component.html',
             directives: [calendar_component_1.CalendarComponent]
         }), 
         __metadata('design:paramtypes', [])

@@ -4,7 +4,7 @@ import { SchoolListComponent, SchoolDetailComponent, SchoolEditComponent, School
 import { EdicListComponent, EdicDetailComponent, EdicEditComponent, EdicNewComponent } from './objectcomponents/edic.component';
 import { AssociationListComponent, AssociationDetailComponent, AssociationEditComponent, AssociationNewComponent } from './objectcomponents/association.component';
 import { ApplyingTeamListComponent, ApplyingTeamDetailComponent, ApplyingTeamEditComponent, ApplyingTeamNewComponent } from './objectcomponents/applyingteam.component';
-import { TeacherProfileListComponent, TeacherProfileDetailComponent, TeacherProfileEditComponent, TeacherProfileNewComponent } from './objectcomponents/teacherprofile.component';
+import { TeacherProfileListComponent, TeacherProfileDetailComponent, TeacherProfileEditComponent, TeacherProfileNewComponent, TeacherProfileThanksComponent } from './objectcomponents/teacherprofile.component';
 import { EdicProfileListComponent, EdicProfileDetailComponent, EdicProfileEditComponent, EdicProfileNewComponent } from './objectcomponents/edicprofile.component';
 import { AssociationProfileListComponent, AssociationProfileDetailComponent, AssociationProfileEditComponent, AssociationProfileNewComponent } from './objectcomponents/associationprofile.component';
 import { ForumListComponent, ForumDetailComponent, ForumEditComponent, ForumNewComponent } from './forum/forum.component';
@@ -12,7 +12,7 @@ import { ForumChannelListComponent, ForumChannelDetailComponent, ForumChannelEdi
 import { ForumThreadListComponent, ForumThreadDetailComponent, ForumThreadEditComponent, ForumThreadNewComponent } from './forum/forum.component';
 import { ForumPostListComponent, ForumPostDetailComponent, ForumPostEditComponent, ForumPostNewComponent } from './forum/forum.component';
 import { FormBuildercomponent, FormCompilercomponent } from './formcreator/component';
-import { LoginComponent, LogoutComponent, RegisterComponent} from './components/login.component';
+import { LoginComponent, LogRegComponent, LogoutComponent, RegisterComponent, ActivationComponent} from './components/login.component';
 import { ForumComponent } from './forum/forum.component';
 
 import { HomeComponent } from './pages/home.component';
@@ -33,9 +33,9 @@ const associationRoutes: RouterConfig = new DRFModelRouter("partners/association
 const routes: RouterConfig = [
   { path: '', component: HomeComponent },
 
-  { path: 'signup', component: RegisterComponent },
-
-  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: LogRegComponent },
+  { path: 'login', component: LogRegComponent },
+  
   { path: 'logout', component: LogoutComponent },
 
   { path: 'apply', component: ApplyingTeamNewComponent, canActivate: [AuthGuard] },
@@ -50,6 +50,7 @@ const routes: RouterConfig = [
   { path: 'profile/:id', component: ProfileViewComponent},
   { path: 'profile/create', component: ProfileCreationSelection, canActivate: [AuthGuard] },
   { path: 'profile/create/teacher', component: TeacherProfileNewComponent, canActivate: [AuthGuard] },
+  { path: 'profile/create/teacher/thanks', component: TeacherProfileThanksComponent, canActivate: [AuthGuard] },
   { path: 'profile/create/edic', component: EdicProfileNewComponent, canActivate: [AuthGuard] },
   { path: 'profile/create/association', component: AssociationProfileNewComponent, canActivate: [AuthGuard] },
   //{ path: 'profile/create/student', component: SchoolNewComponent, canActivate: [AuthGuard] },
@@ -70,6 +71,8 @@ const routes: RouterConfig = [
       ] }
     ] }
   ] },
+  { path: 'activate/:uid/:token', component: ActivationComponent },
+  { path: 'confirm/:uid/:token', component: ActivationComponent },
 
   { path: 'schoolblog', component: SchoolBlogComponent },
   { path: 'communityblog', component: CommunityBlogComponent },
